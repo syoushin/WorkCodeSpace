@@ -14,10 +14,9 @@ namespace JohnCheckPoint
     /// </summary>
     public sealed partial class TimeTriggeredTask : Page
     {
-
         // A pointer back to the main page.  This is needed if you want to call methods in MainPage such
         // as NotifyUser()
-        MainPage rootPage = MainPage.Current;
+        private MainPage rootPage = MainPage.Current;
 
         public TimeTriggeredTask()
         {
@@ -91,7 +90,6 @@ namespace JohnCheckPoint
             });
         }
 
-
         /// <summary>
         /// Register a TimeTriggeredTask.
         /// </summary>
@@ -118,6 +116,5 @@ namespace JohnCheckPoint
             BackgroundTaskSample.UnregisterBackgroundTasks(BackgroundTaskSample.TimeTriggeredTaskName);
             UpdateUI();
         }
-
     }
 }

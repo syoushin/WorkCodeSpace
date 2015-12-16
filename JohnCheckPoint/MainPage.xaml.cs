@@ -39,12 +39,11 @@ namespace JohnCheckPoint
         }
 
         /// <summary>
-        /// Called whenever the user changes selection in the scenarios list.  This method will navigate to the respective
+        /// Called whenever the user changes selection in the scenarios list. This method will navigate to the respective
         /// sample scenario page.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-
         private void ScenarioControl_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             // Clear the status block when navigating scenarios.
@@ -105,7 +104,8 @@ namespace JohnCheckPoint
         {
             Splitter.IsPaneOpen = !Splitter.IsPaneOpen;
         }
-    }
+
+      }
 
 
     public class ScenarioBindingConverter : IValueConverter

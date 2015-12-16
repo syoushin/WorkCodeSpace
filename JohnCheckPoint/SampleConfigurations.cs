@@ -22,7 +22,6 @@ namespace JohnCheckPoint
             new Scenario() { Title="Background Task with Time Trigger", ClassType=typeof(TimeTriggeredTask) },
             new Scenario() { Title="Background Task with Application Trigger", ClassType=typeof(ApplicationTriggerTask) }
         };
-
     }
 
     public class Scenario
@@ -45,7 +44,6 @@ namespace JohnCheckPoint
         public static string SampleBackgroundTaskWithConditionProgress = "";
         public static bool SampleBackgroundTaskWithConditionRegistered = false;
         public const string ServicingCompleteTaskEntryPoint = "MyBackGroundTask.ServicingComplete";
-
 
 
         public const string ServicingCompleteTaskName = "ServicingCompleteTask";
@@ -74,7 +72,7 @@ namespace JohnCheckPoint
         {
             if (TaskRequiresBackgroundAccess(name))
             {
-                await BackgroundExecutionManager.RequestAccessAsync();
+              await BackgroundExecutionManager.RequestAccessAsync();
             }
 
             var builder = new BackgroundTaskBuilder();
@@ -107,7 +105,7 @@ namespace JohnCheckPoint
             return task;
         }
 
-       
+
         /// <summary>
         /// Store the registration status of a background task with a given name.
         /// </summary>
@@ -136,7 +134,6 @@ namespace JohnCheckPoint
         }
 
 
-
         /// <summary>
         /// Unregister background tasks with specified name.
         /// </summary>
@@ -152,13 +149,12 @@ namespace JohnCheckPoint
                 if (cur.Value.Name == name)
                 {
                     cur.Value.Unregister(true);
+                    
                 }
             }
 
             UpdateBackgroundTaskStatus(name, false);
         }
-
-
 
 
         /// <summary>
@@ -204,8 +200,7 @@ namespace JohnCheckPoint
         /// <param name="name">Name of background task to query background access requirement.</param>
         private static bool TaskRequiresBackgroundAccess(string name)
         {
-            if ((name == TimeTriggeredTaskName) ||
-                (name == ApplicationTriggerTaskName))
+            if ((name == TimeTriggeredTaskName) || (name == ApplicationTriggerTaskName))
             {
                 return true;
             }
@@ -214,8 +209,5 @@ namespace JohnCheckPoint
                 return false;
             }
         }
-
     }
-
-
 }
