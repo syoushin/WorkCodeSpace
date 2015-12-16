@@ -99,7 +99,7 @@ namespace JohnCheckPoint
         {
             var task = BackgroundTaskSample.RegisterBackgroundTask(BackgroundTaskSample.SampleBackgroundTaskEntryPoint,
                                                                    BackgroundTaskSample.TimeTriggeredTaskName,
-                                                                   new TimeTrigger(5, false),
+                                                                   new TimeTrigger(15, false),
                                                                    null);
             await task;
             AttachProgressAndCompletedHandlers(task.Result);
