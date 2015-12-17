@@ -27,10 +27,10 @@ namespace JohnCheckPoint
     {
         // A pointer back to the main page.  This is needed if you want to call methods in MainPage such
         // as NotifyUser()
-        MainPage rootPage = MainPage.Current;
+        private MainPage rootPage = MainPage.Current;
 
         // A pointer to the ApplicationTrigger so we can signal it later
-        ApplicationTrigger trigger = null;
+        private ApplicationTrigger trigger = null;
 
         public ApplicationTriggerTask()
         {

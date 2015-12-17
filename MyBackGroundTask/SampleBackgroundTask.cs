@@ -1,22 +1,25 @@
 ﻿using System;
 using System.Diagnostics;
+using System.Globalization;
 using System.Threading;
+
 using Windows.ApplicationModel.Background;
+using Windows.Data.Xml.Dom;
 using Windows.Foundation;
 using Windows.Storage;
 using Windows.System.Threading;
+using Windows.UI.Notifications;
 
 namespace MyBackGroundTask
 {
     public sealed class SampleBackgroundTask : IBackgroundTask
     {
-
-        BackgroundTaskCancellationReason _cancelReason = BackgroundTaskCancellationReason.Abort;
-        volatile bool _cancelRequested = false;
-        BackgroundTaskDeferral _deferral = null;
-        ThreadPoolTimer _periodicTimer = null;
-        uint _progress = 0;
-        IBackgroundTaskInstance _taskInstance = null;
+        private BackgroundTaskCancellationReason _cancelReason = BackgroundTaskCancellationReason.Abort;
+        private volatile bool _cancelRequested = false;
+        private BackgroundTaskDeferral _deferral = null;
+        private ThreadPoolTimer _periodicTimer = null;
+        private uint _progress = 0;
+        private IBackgroundTaskInstance _taskInstance = null;
 
         public void Run(IBackgroundTaskInstance taskInstance)
         {
@@ -42,7 +45,6 @@ namespace MyBackGroundTask
             _taskInstance = taskInstance;
 
             _periodicTimer = ThreadPoolTimer.CreatePeriodicTimer(new TimerElapsedHandler(PeriodicTimerCallback), TimeSpan.FromSeconds(1));
-
         }
 
         //
@@ -67,7 +69,7 @@ namespace MyBackGroundTask
                 //
                 settings.Values[key] = (_progress < 100) ? "Canceled with reason: " + _cancelReason.ToString() : "Completed";
                 Debug.WriteLine("Background " + _taskInstance.Task.Name + settings.Values[key]);
-
+                InvokeSimpleToast(_taskInstance.Task.Name + settings.Values[key]);
                 //
                 // Indicate that the background task has completed.
                 //
@@ -87,6 +89,19 @@ namespace MyBackGroundTask
             _cancelReason = reason;
 
             Debug.WriteLine("Background " + sender.Task.Name + " Cancel Requested...");
+        }
+
+        public void InvokeSimpleToast(string toastMessage)
+        {
+            XmlDocument toastXml = ToastNotificationManager.GetTemplateContent(ToastTemplateType.ToastImageAndText02);
+
+            XmlNodeList stringElements = toastXml.GetElementsByTagName("text");
+
+            stringElements.Item(0).AppendChild(toastXml.CreateTextNode(toastMessage));
+            stringElements.Item(1).AppendChild(toastXml.CreateTextNode(toastMessage));
+
+            ToastNotification toast = new ToastNotification(toastXml);
+            ToastNotificationManager.CreateToastNotifier().Show(toast);
         }
     }
 }
