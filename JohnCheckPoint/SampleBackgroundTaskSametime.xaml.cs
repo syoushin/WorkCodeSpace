@@ -33,10 +33,10 @@ namespace JohnCheckPoint
         {
             foreach (var task in BackgroundTaskRegistration.AllTasks)
             {
-                if (task.Value.Name == BackgroundTaskSample.SampleBackgroundTaskName)
+                if (task.Value.Name == BackgroundTaskSample.SampleBackgroundTaskSametime)
                 {
                     AttachProgressAndCompletedHandlers(task.Value);
-                    BackgroundTaskSample.UpdateBackgroundTaskStatus(BackgroundTaskSample.SampleBackgroundTaskName, true);
+                    BackgroundTaskSample.UpdateBackgroundTaskStatus(BackgroundTaskSample.SampleBackgroundTaskSametime, true);
                     break;
                 }
             }
@@ -87,7 +87,7 @@ namespace JohnCheckPoint
         private void OnProgress(BackgroundTaskRegistration sender, BackgroundTaskProgressEventArgs args)
         {
             var progress = "Progress: " + args.Progress + "%";
-            BackgroundTaskSample.SampleBackgroundTaskProgress = progress;
+            BackgroundTaskSample.SampleBackgroundTaskSametimeProgress = progress;
             UpdateUI();
         }
 
@@ -114,7 +114,7 @@ namespace JohnCheckPoint
         /// <param name="e"></param>
         private void UnregisterBackgroundTask(object sender, RoutedEventArgs e)
         {
-            BackgroundTaskSample.UnregisterBackgroundTasks(BackgroundTaskSample.SampleBackgroundTaskName);
+            BackgroundTaskSample.UnregisterBackgroundTasks(BackgroundTaskSample.SampleBackgroundTaskSametime);
             UpdateUI();
         }
     }
