@@ -45,9 +45,13 @@ namespace JohnCheckPoint
         public static string SampleBackgroundTaskWithConditionProgress = "";
         public static bool SampleBackgroundTaskWithConditionRegistered = false;
 
-        public const string SampleBackgroundTaskSametimeEntryPoint = "MyBackGroundTask.SampleBackgroundTaskSametime";
+        public const string SampleBackgroundTaskSametimeEntryPoint = "MyBackGroundTask.SampleBackgroundSametime";
         public const string SampleBackgroundTaskSametime = "SampleBackgroundTaskSametime";
+
+        //public const string SampleBackgroundTaskSametimeEntryPoint = "MyBackGroundTask.SampleBackgroundTask";
+        //public const string SampleBackgroundTaskSametime = "SampleBackgroundTaskSametime";
         public static string SampleBackgroundTaskSametimeProgress = "";
+
         public static bool SampleBackgroundTaskSametimeRegistered = false;
 
         public const string ServicingCompleteTaskName = "InAppBackgroundTest";
