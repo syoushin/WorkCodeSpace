@@ -22,14 +22,13 @@ namespace JohnCheckPoint
     /// <summary>
     /// An empty page that can be used on its own or navigated to within a Frame.
     /// </summary>
-    public sealed partial class ServicingCompleteTask : Page
+    public sealed partial class InAppBackgroundTest : Page
     {
-
         // A pointer back to the main page.  This is needed if you want to call methods in MainPage such
         // as NotifyUser()
-        MainPage rootPage = MainPage.Current;
+        private MainPage rootPage = MainPage.Current;
 
-        public ServicingCompleteTask()
+        public InAppBackgroundTest()
         {
             this.InitializeComponent();
         }
@@ -112,7 +111,6 @@ namespace JohnCheckPoint
             BackgroundTaskSample.UnregisterBackgroundTasks(BackgroundTaskSample.ServicingCompleteTaskName);
             UpdateUI();
         }
-
 
         /// <summary>
         /// Update the scenario UI.

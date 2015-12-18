@@ -14,11 +14,11 @@ namespace JohnCheckPoint
     {
         public const string FEATURE_NAME = "Background tasks";
 
-        List<Scenario> scenarios = new List<Scenario>
+        private List<Scenario> scenarios = new List<Scenario>
         {
             new Scenario() { Title="Background Task", ClassType=typeof(SampleBackgroundTask)},
             new Scenario() { Title="Background Task with Condition", ClassType=typeof(SampleBackgroundTaskWithCondition)},
-            new Scenario() { Title="Servicing Complete Task", ClassType=typeof(ServicingCompleteTask)},
+            new Scenario() { Title="Background in APP Test", ClassType=typeof(InAppBackgroundTest)},
             new Scenario() { Title="Background Task with Time Trigger", ClassType=typeof(TimeTriggeredTask) },
             new Scenario() { Title="Background Task with Application Trigger", ClassType=typeof(ApplicationTriggerTask) }
         };
@@ -33,7 +33,7 @@ namespace JohnCheckPoint
 
 namespace JohnCheckPoint
 {
-    class BackgroundTaskSample
+    internal class BackgroundTaskSample
     {
         public const string SampleBackgroundTaskEntryPoint = "MyBackGroundTask.SampleBackgroundTask";
         public const string SampleBackgroundTaskName = "SampleBackgroundTask";
@@ -43,12 +43,11 @@ namespace JohnCheckPoint
         public const string SampleBackgroundTaskWithConditionName = "SampleBackgroundTaskWithCondition";
         public static string SampleBackgroundTaskWithConditionProgress = "";
         public static bool SampleBackgroundTaskWithConditionRegistered = false;
-        public const string ServicingCompleteTaskEntryPoint = "MyBackGroundTask.ServicingComplete";
 
-
-        public const string ServicingCompleteTaskName = "ServicingCompleteTask";
+        public const string ServicingCompleteTaskName = "InAppBackgroundTest";
         public static string ServicingCompleteTaskProgress = "";
         public static bool ServicingCompleteTaskRegistered = false;
+        public const string ServicingCompleteTaskEntryPoint = "JohnCheckPoint.ServicingComplete";
 
         public const string TimeTriggeredTaskName = "TimeTriggeredTask";
         public static string TimeTriggeredTaskProgress = "";
@@ -58,7 +57,6 @@ namespace JohnCheckPoint
         public static string ApplicationTriggerTaskProgress = "";
         public static string ApplicationTriggerTaskResult = "";
         public static bool ApplicationTriggerTaskRegistered = false;
-
 
         /// <summary>
         /// Register a background task with the specified taskEntryPoint, name, trigger,
@@ -72,7 +70,7 @@ namespace JohnCheckPoint
         {
             if (TaskRequiresBackgroundAccess(name))
             {
-              await BackgroundExecutionManager.RequestAccessAsync();
+                await BackgroundExecutionManager.RequestAccessAsync();
             }
 
             var builder = new BackgroundTaskBuilder();
@@ -105,7 +103,6 @@ namespace JohnCheckPoint
             return task;
         }
 
-
         /// <summary>
         /// Store the registration status of a background task with a given name.
         /// </summary>
@@ -118,21 +115,24 @@ namespace JohnCheckPoint
                 case SampleBackgroundTaskName:
                     SampleBackgroundTaskRegistered = registered;
                     break;
+
                 case SampleBackgroundTaskWithConditionName:
                     SampleBackgroundTaskWithConditionRegistered = registered;
                     break;
+
                 case ServicingCompleteTaskName:
                     ServicingCompleteTaskRegistered = registered;
                     break;
+
                 case TimeTriggeredTaskName:
                     TimeTriggeredTaskRegistered = registered;
                     break;
+
                 case ApplicationTriggerTaskName:
                     ApplicationTriggerTaskRegistered = registered;
                     break;
             }
         }
-
 
         /// <summary>
         /// Unregister background tasks with specified name.
@@ -149,13 +149,11 @@ namespace JohnCheckPoint
                 if (cur.Value.Name == name)
                 {
                     cur.Value.Unregister(true);
-                    
                 }
             }
 
             UpdateBackgroundTaskStatus(name, false);
         }
-
 
         /// <summary>
         /// Get the registration / completion status of the background task with
@@ -170,15 +168,19 @@ namespace JohnCheckPoint
                 case SampleBackgroundTaskName:
                     registered = SampleBackgroundTaskRegistered;
                     break;
+
                 case SampleBackgroundTaskWithConditionName:
                     registered = SampleBackgroundTaskWithConditionRegistered;
                     break;
+
                 case ServicingCompleteTaskName:
                     registered = ServicingCompleteTaskRegistered;
                     break;
+
                 case TimeTriggeredTaskName:
                     registered = TimeTriggeredTaskRegistered;
                     break;
+
                 case ApplicationTriggerTaskName:
                     registered = ApplicationTriggerTaskRegistered;
                     break;
