@@ -20,7 +20,8 @@ namespace JohnCheckPoint
             new Scenario() { Title="Background Task with Condition", ClassType=typeof(SampleBackgroundTaskWithCondition)},
             new Scenario() { Title="Background in APP Test", ClassType=typeof(InAppBackgroundTest)},
             new Scenario() { Title="Background Task with Time Trigger", ClassType=typeof(TimeTriggeredTask) },
-            new Scenario() { Title="Background Task with Application Trigger", ClassType=typeof(ApplicationTriggerTask) }
+            new Scenario() { Title="Background Task with Application Trigger", ClassType=typeof(ApplicationTriggerTask) },
+            new Scenario() { Title="Background Task Run SameTime", ClassType=typeof(SampleBackgroundTaskSametime) }
         };
     }
 
@@ -43,6 +44,11 @@ namespace JohnCheckPoint
         public const string SampleBackgroundTaskWithConditionName = "SampleBackgroundTaskWithCondition";
         public static string SampleBackgroundTaskWithConditionProgress = "";
         public static bool SampleBackgroundTaskWithConditionRegistered = false;
+
+        public const string SampleBackgroundTaskSametimeEntryPoint = "MyBackGroundTask.SampleBackgroundTaskSametime";
+        public const string SampleBackgroundTaskSametime = "SampleBackgroundTaskSametime";
+        public static string SampleBackgroundTaskSametimeProgress = "";
+        public static bool SampleBackgroundTaskSametimeRegistered = false;
 
         public const string ServicingCompleteTaskName = "InAppBackgroundTest";
         public static string ServicingCompleteTaskProgress = "";
@@ -131,6 +137,10 @@ namespace JohnCheckPoint
                 case ApplicationTriggerTaskName:
                     ApplicationTriggerTaskRegistered = registered;
                     break;
+
+                case SampleBackgroundTaskSametime:
+                    SampleBackgroundTaskSametimeRegistered = registered;
+                    break;
             }
         }
 
@@ -183,6 +193,10 @@ namespace JohnCheckPoint
 
                 case ApplicationTriggerTaskName:
                     registered = ApplicationTriggerTaskRegistered;
+                    break;
+
+                case SampleBackgroundTaskSametime:
+                    registered = SampleBackgroundTaskSametimeRegistered;
                     break;
             }
             var status = registered ? "Registered" : "Unregistered";

@@ -110,6 +110,9 @@
     <Compile Include="SampleBackgroundTask.xaml.cs">
       <DependentUpon>SampleBackgroundTask.xaml</DependentUpon>
     </Compile>
+    <Compile Include="SampleBackgroundTaskSametime.xaml.cs">
+      <DependentUpon>SampleBackgroundTaskSametime.xaml</DependentUpon>
+    </Compile>
     <Compile Include="SampleBackgroundTaskWithCondition.xaml.cs">
       <DependentUpon>SampleBackgroundTaskWithCondition.xaml</DependentUpon>
     </Compile>
@@ -152,6 +155,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="SampleBackgroundTask.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="SampleBackgroundTaskSametime.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

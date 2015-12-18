@@ -1,18 +1,18 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
-using System.Globalization;
-using System.Threading;
-
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.Data.Xml.Dom;
-using Windows.Foundation;
 using Windows.Storage;
 using Windows.System.Threading;
 using Windows.UI.Notifications;
 
 namespace MyBackGroundTask
 {
-    public sealed class SampleBackgroundTask : IBackgroundTask
+    public sealed class SampleBackgroundSametime : IBackgroundTask
     {
         private BackgroundTaskCancellationReason _cancelReason = BackgroundTaskCancellationReason.Abort;
         private volatile bool _cancelRequested = false;
