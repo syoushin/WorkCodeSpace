@@ -88,6 +88,7 @@ namespace JohnCheckPoint
         private async void RegisterBackgroundTask(object sender, RoutedEventArgs e)
         {
             var task = BackgroundTaskSample.RegisterBackgroundTask(BackgroundTaskSample.SampleBackgroundTaskEntryPoint,
+                                                                // BackgroundTaskSample.SampleBackgroundTaskTwoEntryPoint,
                                                                   BackgroundTaskSample.SampleBackgroundTaskWithConditionName,
                                                                   new SystemTrigger(SystemTriggerType.TimeZoneChange, false),
                                                                   new SystemCondition(SystemConditionType.InternetAvailable)

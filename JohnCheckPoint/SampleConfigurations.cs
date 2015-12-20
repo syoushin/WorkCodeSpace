@@ -36,6 +36,7 @@ namespace JohnCheckPoint
 {
     internal class BackgroundTaskSample
     {
+        
         public const string SampleBackgroundTaskEntryPoint = "MyBackGroundTask.SampleBackgroundTask";
         public const string SampleBackgroundTaskName = "SampleBackgroundTask";
         public static string SampleBackgroundTaskProgress = "";
@@ -47,12 +48,12 @@ namespace JohnCheckPoint
 
         public const string SampleBackgroundTaskSametimeEntryPoint = "MyBackGroundTask.SampleBackgroundSametime";
         public const string SampleBackgroundTaskSametime = "SampleBackgroundTaskSametime";
-
-        //public const string SampleBackgroundTaskSametimeEntryPoint = "MyBackGroundTask.SampleBackgroundTask";
-        //public const string SampleBackgroundTaskSametime = "SampleBackgroundTaskSametime";
         public static string SampleBackgroundTaskSametimeProgress = "";
-
         public static bool SampleBackgroundTaskSametimeRegistered = false;
+
+
+        public const string SampleBackgroundTaskTwoEntryPoint = "MyBackgroundTaskTwo.SampleBackgroundTask";
+
 
         public const string ServicingCompleteTaskName = "InAppBackgroundTest";
         public static string ServicingCompleteTaskProgress = "";

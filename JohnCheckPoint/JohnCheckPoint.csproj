@@ -181,6 +181,10 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\MyBackgroundTaskTwo\MyBackgroundTaskTwo.csproj">
+      <Project>{861781c2-b8de-496c-9c3a-0a2056a797e1}</Project>
+      <Name>MyBackgroundTaskTwo</Name>
+    </ProjectReference>
     <ProjectReference Include="..\MyBackGroundTask\MyBackGroundTask.csproj">
       <Project>{4d6f76ee-a740-422f-8d25-67da9891a9f9}</Project>
       <Name>MyBackGroundTask</Name>
