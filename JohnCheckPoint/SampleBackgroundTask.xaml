@@ -14,7 +14,7 @@
                     <TextBlock Text="Description:" Style="{StaticResource SampleHeaderTextStyle}"/>
                     <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}"/>
                     <TextBlock Style="{StaticResource ScenarioDescriptionTextStyle}" TextWrapping="Wrap">
-                        Regist the Background task with a TimeZoomTriger
+                        Regist the Background task with a TimeZoneTriger
                     </TextBlock>
                     <StackPanel HorizontalAlignment="Left" VerticalAlignment="Top" Orientation="Horizontal" Margin="0,10,0,10">
                         <Button x:Name="RegisterButton" Content="Register" Click="RegisterBackgroundTask" Margin="0,0,10,0" />
