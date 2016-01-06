@@ -21,10 +21,11 @@
         <uap:SplashScreen Image="Assets\SplashScreen.png" />
       </uap:VisualElements>
       <Extensions>
-        <Extension Category="windows.backgroundTasks" EntryPoint="JohnCheckPoint.BackgroundTaskTest">
+        <Extension Category="windows.backgroundTasks" Executable="$targetnametoken$.exe" EntryPoint="MyBackGroundTask.SampleBackgroundTaskInProcess">
           <BackgroundTasks>
             <Task Type="systemEvent" />
             <Task Type="timer" />
+            <Task Type="pushNotification" />
           </BackgroundTasks>
         </Extension>
         <Extension Category="windows.backgroundTasks" EntryPoint="MyBackGroundTask.SampleBackgroundSametime">
@@ -34,12 +35,6 @@
           </BackgroundTasks>
         </Extension>
         <Extension Category="windows.backgroundTasks" EntryPoint="MyBackGroundTask.SampleBackgroundTask">
-          <BackgroundTasks>
-            <Task Type="systemEvent" />
-            <Task Type="timer" />
-          </BackgroundTasks>
-        </Extension>
-        <Extension Category="windows.backgroundTasks" EntryPoint="MyBackgroundTaskTwo.SampleBackgroundTask">
           <BackgroundTasks>
             <Task Type="systemEvent" />
             <Task Type="timer" />

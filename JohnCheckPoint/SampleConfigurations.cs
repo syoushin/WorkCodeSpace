@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -36,7 +37,6 @@ namespace JohnCheckPoint
 {
     internal class BackgroundTaskSample
     {
-        
         public const string SampleBackgroundTaskEntryPoint = "MyBackGroundTask.SampleBackgroundTask";
         public const string SampleBackgroundTaskName = "SampleBackgroundTask";
         public static string SampleBackgroundTaskProgress = "";
@@ -51,14 +51,10 @@ namespace JohnCheckPoint
         public static string SampleBackgroundTaskSametimeProgress = "";
         public static bool SampleBackgroundTaskSametimeRegistered = false;
 
-
-        public const string SampleBackgroundTaskTwoEntryPoint = "MyBackgroundTaskTwo.SampleBackgroundTask";
-
-
         public const string ServicingCompleteTaskName = "InAppBackgroundTest";
         public static string ServicingCompleteTaskProgress = "";
         public static bool ServicingCompleteTaskRegistered = false;
-        public const string ServicingCompleteTaskEntryPoint = "JohnCheckPoint.ServicingComplete";
+        public const string ServicingCompleteTaskEntryPoint = "MyBackGroundTask.SampleBackgroundTaskInProcess";
 
         public const string TimeTriggeredTaskName = "TimeTriggeredTask";
         public static string TimeTriggeredTaskProgress = "";
@@ -161,6 +157,7 @@ namespace JohnCheckPoint
             //
             foreach (var cur in BackgroundTaskRegistration.AllTasks)
             {
+                Debug.WriteLine(cur.Value.Name);
                 if (cur.Value.Name == name)
                 {
                     cur.Value.Unregister(true);

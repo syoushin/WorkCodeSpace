@@ -1,27 +1,44 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
+using System.Globalization;
+using System.Threading;
 using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.Data.Xml.Dom;
+using Windows.Foundation;
 using Windows.Storage;
 using Windows.System.Threading;
 using Windows.UI.Notifications;
 
-namespace MyBackgroundTaskTwo
+namespace MyBackGroundTask
 {
-    public sealed class SampleBackgroundTask : IBackgroundTask
+    public sealed class SampleBackgroundTaskInProcess : IBackgroundTask
     {
         private BackgroundTaskCancellationReason _cancelReason = BackgroundTaskCancellationReason.Abort;
+
         private volatile bool _cancelRequested = false;
         private BackgroundTaskDeferral _deferral = null;
         private ThreadPoolTimer _periodicTimer = null;
         private uint _progress = 0;
         private IBackgroundTaskInstance _taskInstance = null;
 
-        public void Run(IBackgroundTaskInstance taskInstance)
+        public long fib(long n)
+        {
+            if (n == 0)
+            {
+                return 0;
+            }
+            else if (n == 1)
+            {
+                return 1;
+            }
+            else
+            {
+                return fib(n - 1) + fib(n - 2);
+            }
+        }
+
+        public async void Run(IBackgroundTaskInstance taskInstance)
         {
             Debug.WriteLine("Background " + taskInstance.Task.Name + " Starting...");
 
@@ -63,6 +80,16 @@ namespace MyBackgroundTaskTwo
             _deferral = taskInstance.GetDeferral();
             _taskInstance = taskInstance;
 
+            //测试background task的CPU使用限制
+            //taskInstance.Progress = 0;
+            //long fi = fib(50);
+            //Debug.WriteLine(fi);
+            //taskInstance.Progress = 100;
+            //_deferral.Complete();
+
+            //在background task内注册一个新的background task
+            // RegisterBackgroundTasks();
+
             _periodicTimer = ThreadPoolTimer.CreatePeriodicTimer(new TimerElapsedHandler(PeriodicTimerCallback), TimeSpan.FromSeconds(1));
         }
 
@@ -71,7 +98,7 @@ namespace MyBackgroundTaskTwo
         //
         private void PeriodicTimerCallback(ThreadPoolTimer timer)
         {
-            if ((_cancelRequested == false) && (_progress < 100))
+            if ((_cancelRequested == false) && (_progress < 350))
             {
                 _progress += 10;
                 _taskInstance.Progress = _progress;
@@ -86,7 +113,7 @@ namespace MyBackgroundTaskTwo
                 //
                 // Write to LocalSettings to indicate that this background task ran.
                 //
-                settings.Values[key] = (_progress < 100) ? "Canceled with reason: " + _cancelReason.ToString() : "Completed";
+                settings.Values[key] = (_progress < 350) ? "Canceled with reason: " + _cancelReason.ToString() : "Completed";
                 Debug.WriteLine("Background " + _taskInstance.Task.Name + settings.Values[key]);
                 InvokeSimpleToast(_taskInstance.Task.Name + settings.Values[key]);
                 //
@@ -122,6 +149,24 @@ namespace MyBackgroundTaskTwo
             ToastNotification toast = new ToastNotification(toastXml);
             ToastNotificationManager.CreateToastNotifier().Show(toast);
         }
+
+        private void RegisterBackgroundTasks()
+        {
+            BackgroundTaskBuilder builder = new BackgroundTaskBuilder();
+            builder.Name = "SampleBackgroundTaskTest";
+            builder.TaskEntryPoint = "MyBackGroundTask.SampleBackgroundTask";
+            IBackgroundTrigger trigger = new TimeTrigger(15, false);
+            builder.SetTrigger(trigger);
+            IBackgroundCondition condition = new SystemCondition(SystemConditionType.InternetAvailable);
+            builder.AddCondition(condition);
+            IBackgroundTaskRegistration task = builder.Register();
+
+            task.Completed += new BackgroundTaskCompletedEventHandler(task_Completed);
+        }
+
+        private void task_Completed(BackgroundTaskRegistration sender, BackgroundTaskCompletedEventArgs args)
+        {
+            InvokeSimpleToast("the second background task");
+        }
     }
 }
-

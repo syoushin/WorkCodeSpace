@@ -99,7 +99,8 @@ namespace JohnCheckPoint
         {
             var task = BackgroundTaskSample.RegisterBackgroundTask(BackgroundTaskSample.SampleBackgroundTaskEntryPoint,
                                                                    BackgroundTaskSample.TimeTriggeredTaskName,
-                                                                    new TimeTrigger(15, false),
+                                                                   new TimeTrigger(15, false),
+                                                                   //new MaintenanceTrigger(15, false),
                                                                    //   new SystemTrigger(SystemTriggerType.NetworkStateChange, false),
                                                                    //  new BluetoothLEAdvertisementWatcherTrigger(),
                                                                    //   new DeviceUseTrigger(),

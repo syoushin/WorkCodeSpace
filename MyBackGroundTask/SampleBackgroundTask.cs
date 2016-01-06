@@ -2,7 +2,7 @@
 using System.Diagnostics;
 using System.Globalization;
 using System.Threading;
-
+using System.Threading.Tasks;
 using Windows.ApplicationModel.Background;
 using Windows.Data.Xml.Dom;
 using Windows.Foundation;
@@ -20,6 +20,22 @@ namespace MyBackGroundTask
         private ThreadPoolTimer _periodicTimer = null;
         private uint _progress = 0;
         private IBackgroundTaskInstance _taskInstance = null;
+
+        public long fib(long n)
+        {
+            if (n == 0)
+            {
+                return 0;
+            }
+            else if (n == 1)
+            {
+                return 1;
+            }
+            else
+            {
+                return fib(n - 1) + fib(n - 2);
+            }
+        }
 
         public void Run(IBackgroundTaskInstance taskInstance)
         {
@@ -60,8 +76,18 @@ namespace MyBackGroundTask
             //
             // Get the deferral object from the task instance, and take a reference to the taskInstance;
             //
-            _deferral = taskInstance.GetDeferral();
             _taskInstance = taskInstance;
+            _deferral = taskInstance.GetDeferral();
+
+            //taskInstance.Progress = 0;
+            //long fi = fib(50);
+            //Debug.WriteLine(fi);
+            //taskInstance.Progress = 100;
+            //_deferral.Complete();
+
+            //taskInstance.Progress = 0;
+            //int i = 0, j = 0; while (true) { if (i != 100) i++; else { j = i; if (j != 0) j--; else i = j; } };
+            //taskInstance.Progress = 100;
 
             _periodicTimer = ThreadPoolTimer.CreatePeriodicTimer(new TimerElapsedHandler(PeriodicTimerCallback), TimeSpan.FromSeconds(1));
         }
@@ -92,6 +118,7 @@ namespace MyBackGroundTask
                 //
                 // Indicate that the background task has completed.
                 //
+
                 _deferral.Complete();
             }
         }

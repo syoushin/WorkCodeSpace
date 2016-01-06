@@ -30,7 +30,6 @@ namespace JohnCheckPoint
             this.InitializeComponent();
         }
 
-
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
             foreach (var task in BackgroundTaskRegistration.AllTasks)
@@ -61,7 +60,6 @@ namespace JohnCheckPoint
            });
         }
 
-
         /// <summary>
         /// Attach progress and completed handers to a background task.
         /// </summary>
@@ -72,7 +70,6 @@ namespace JohnCheckPoint
             task.Completed += new BackgroundTaskCompletedEventHandler(OnCompleted);
         }
 
-
         /// <summary>
         /// Handle background task completion.
         /// </summary>
@@ -82,7 +79,6 @@ namespace JohnCheckPoint
         {
             UpdateUI();
         }
-
 
         /// <summary>
         /// Handle background task progress.
@@ -122,7 +118,5 @@ namespace JohnCheckPoint
             BackgroundTaskSample.UnregisterBackgroundTasks(BackgroundTaskSample.SampleBackgroundTaskName);
             UpdateUI();
         }
-
-      
     }
 }

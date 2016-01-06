@@ -6,6 +6,9 @@ using System.Runtime.InteropServices.WindowsRuntime;
 using Windows.ApplicationModel.Background;
 using Windows.Foundation;
 using Windows.Foundation.Collections;
+using Windows.Networking;
+using Windows.Networking.Connectivity;
+using Windows.Networking.Sockets;
 using Windows.UI.Core;
 using Windows.UI.Xaml;
 using Windows.UI.Xaml.Controls;
@@ -94,7 +97,7 @@ namespace JohnCheckPoint
         {
             var task = BackgroundTaskSample.RegisterBackgroundTask(BackgroundTaskSample.ServicingCompleteTaskEntryPoint,
                                                                   BackgroundTaskSample.ServicingCompleteTaskName,
-                                                                  new SystemTrigger(SystemTriggerType.ServicingComplete, false),
+                                                                  new SystemTrigger(SystemTriggerType.TimeZoneChange, false),
                                                                   null);
             await task;
             AttachProgressAndCompletedHandlers(task.Result);
@@ -109,6 +112,7 @@ namespace JohnCheckPoint
         private void UnregisterBackgroundTask(object sender, RoutedEventArgs e)
         {
             BackgroundTaskSample.UnregisterBackgroundTasks(BackgroundTaskSample.ServicingCompleteTaskName);
+            BackgroundTaskSample.UnregisterBackgroundTasks("SampleBackgroundTaskTest");
             UpdateUI();
         }
 

@@ -26,7 +26,7 @@ namespace JohnCheckPoint
     {
         // A pointer back to the main page.  This is needed if you want to call methods in MainPage such
         // as NotifyUser()
-        MainPage rootPage = MainPage.Current;
+        private MainPage rootPage = MainPage.Current;
 
         public SampleBackgroundTaskWithCondition()
         {
@@ -35,7 +35,7 @@ namespace JohnCheckPoint
 
         protected override void OnNavigatedTo(NavigationEventArgs e)
         {
-             foreach (var task in BackgroundTaskRegistration.AllTasks)
+            foreach (var task in BackgroundTaskRegistration.AllTasks)
             {
                 if (task.Value.Name == BackgroundTaskSample.SampleBackgroundTaskWithConditionName)
                 {
@@ -47,7 +47,6 @@ namespace JohnCheckPoint
 
             UpdateUI();
         }
-
 
         /// <summary>
         /// Attach progress and completed handers to a background task.
@@ -68,6 +67,7 @@ namespace JohnCheckPoint
         {
             UpdateUI();
         }
+
         /// <summary>
         /// Handle background task progress.
         /// </summary>
@@ -88,10 +88,10 @@ namespace JohnCheckPoint
         private async void RegisterBackgroundTask(object sender, RoutedEventArgs e)
         {
             var task = BackgroundTaskSample.RegisterBackgroundTask(BackgroundTaskSample.SampleBackgroundTaskEntryPoint,
-                                                                // BackgroundTaskSample.SampleBackgroundTaskTwoEntryPoint,
                                                                   BackgroundTaskSample.SampleBackgroundTaskWithConditionName,
                                                                   new SystemTrigger(SystemTriggerType.TimeZoneChange, false),
                                                                   new SystemCondition(SystemConditionType.InternetAvailable)
+                                                                 //new SystemCondition(SystemConditionType.UserNotPresent)
                                                                  );
             await task;
             AttachProgressAndCompletedHandlers(task.Result);
@@ -108,7 +108,6 @@ namespace JohnCheckPoint
             BackgroundTaskSample.UnregisterBackgroundTasks(BackgroundTaskSample.SampleBackgroundTaskWithConditionName);
             UpdateUI();
         }
-
 
         /// <summary>
         /// Update the scenario UI.
